@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0A0A0A;
+  --bg-soft: #111111;
+  --bg-card: #141414;
+  --line: #222222;
+  --bone: #F5F5F0;
+  --muted: #8a8a85;
+  --muted-2: #5c5c58;
+  --orange: #FF4500;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--bone);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  /* Dot grid texture */
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+input::placeholder { color: var(--muted-2); }
+input:focus { outline: none; }
+
+/* ── Hero section com imagem de fundo ── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    url('/hero-bg.jpg') center right / cover no-repeat;
+  opacity: 0.2;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+}
+
+.hero-section:hover::before {
+  opacity: 1;
+}
+
+.hero-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Noise grain overlay ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { width: 0; }
+  to   { width: 48px; }
+}
+
+/* ── Animation utilities ── */
+.anim-fade-up    { animation: fadeUp  0.6s ease both; }
+.anim-fade-in    { animation: fadeIn  0.5s ease both; }
+.anim-slide-right { animation: slideRight 0.8s ease both; }
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+.delay-7 { animation-delay: 0.7s; }
+
+/* ── Hover states ── */
+.benefit-card {
+  transition: border-color 0.2s, transform 0.2s;
+}
+.benefit-card:hover {
+  border-color: rgba(255,69,0,0.35) !important;
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  transition: opacity 0.2s, transform 0.15s !important;
+}
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.cta-btn {
+  transition: transform 0.15s, opacity 0.15s;
+}
+.cta-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+/* ── Link cards ── */
+.link-card {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 24px;
+  text-decoration: none;
+  color: var(--bone);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-card:hover {
+  border-color: rgba(255,69,0,0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(255,69,0,0.08), 0 2px 8px rgba(0,0,0,0.4);
+}
+.link-card.featured {
+  border-color: rgba(255,69,0,0.35);
+  border-left: 2px solid var(--orange);
+}
+.link-card:hover .link-arrow { transform: translateX(4px); }
+.link-arrow { color: var(--orange); transition: transform 0.3s ease; display: inline-block; }
+
+/* ── Avatar ring pulse ── */
+@keyframes ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,0,0.2); }
+  50%       { box-shadow: 0 0 0 8px rgba(255,69,0,0); }
+}
+.avatar-ring { animation: ring-pulse 3s ease infinite; }

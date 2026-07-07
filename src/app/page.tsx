@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const WHATSAPP = "5549991226005";
+const WHATSAPP = "5549991637585";
 const WHATSAPP_MSG = encodeURIComponent(
   "Oi Euller! Quero saber mais sobre IA para o meu negócio."
 );

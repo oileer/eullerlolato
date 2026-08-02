@@ -266,7 +266,9 @@ export default function LemansBarberClub() {
         .lemans-page #cta p{color:var(--l-muted);max-width:48ch;margin:0 auto;}
 
         .lemans-page #autor{padding-top:0;}
-        .lemans-page .author-links{display:flex;gap:14px;flex-wrap:wrap;}
+        .lemans-page .autor-row{display:flex;gap:24px;align-items:flex-start;}
+        @media (max-width:560px){ .lemans-page .autor-row{flex-direction:column;} }
+        .lemans-page .author-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px;}
         .lemans-page .author-links a{
           display:flex;flex-direction:column;gap:4px;
           background:var(--l-bg-card);border:1px solid var(--l-line);border-radius:6px;
@@ -372,17 +374,29 @@ export default function LemansBarberClub() {
         <div className="wrap">
           <div className="reveal"><div className="eyebrow"><span className="num">—</span>Quem constrói</div></div>
           <div className="reveal reveal-delay-1"><div className="rule" /></div>
-          <div className="reveal reveal-delay-1"><h2>Euller Lolato</h2></div>
-          <p className="lede reveal reveal-delay-2">Desenvolvedor por trás da KODY — automações, agentes de IA e produtos web pra negócios reais.</p>
-          <div className="author-links reveal reveal-delay-2">
-            <a href="https://github.com/oileer" target="_blank" rel="noopener noreferrer">
-              <span className="k">GitHub</span>
-              <span className="v">github.com/oileer →</span>
-            </a>
-            <a href="https://www.instagram.com/eullerlolato_/" target="_blank" rel="noopener noreferrer">
-              <span className="k">Instagram</span>
-              <span className="v">@eullerlolato_ →</span>
-            </a>
+          <div className="autor-row">
+            <Image
+              src="/euller.jpg"
+              alt="Euller Lolato"
+              width={88}
+              height={88}
+              className="reveal reveal-delay-1"
+              style={{ borderRadius: "50%", objectFit: "cover", border: "2px solid var(--l-line)" }}
+            />
+            <div>
+              <div className="reveal reveal-delay-1"><h2>Euller Lolato</h2></div>
+              <p className="lede reveal reveal-delay-2">Desenvolvedor por trás da KODY — automações, agentes de IA e produtos web pra negócios reais.</p>
+              <div className="author-links reveal reveal-delay-2">
+                <a href="https://github.com/oileer" target="_blank" rel="noopener noreferrer">
+                  <span className="k">GitHub</span>
+                  <span className="v">github.com/oileer →</span>
+                </a>
+                <a href="https://www.instagram.com/eullerlolato_/" target="_blank" rel="noopener noreferrer">
+                  <span className="k">Instagram</span>
+                  <span className="v">@eullerlolato_ →</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

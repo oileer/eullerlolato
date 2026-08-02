@@ -263,9 +263,19 @@ export default function LemansBarberClub() {
         .lemans-page #cta{text-align:center;padding:160px 0;position:relative;overflow:hidden;}
         .lemans-page #cta::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:120%;background:radial-gradient(ellipse at 50% 30%, rgba(255,69,0,0.16), transparent 60%);pointer-events:none;}
         .lemans-page #cta h2{font-size:clamp(30px,6vw,60px);margin:0 auto 20px;max-width:16ch;}
-        .lemans-page #cta p{color:var(--l-muted);max-width:48ch;margin:0 auto 40px;}
-        .lemans-page .cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--l-orange);color:#0A0A0A;font-weight:700;padding:16px 30px;border-radius:8px;font-size:15px;text-decoration:none;transition:transform 0.15s, opacity 0.15s;}
-        .lemans-page .cta-btn:hover{transform:translateY(-2px);opacity:0.92;}
+        .lemans-page #cta p{color:var(--l-muted);max-width:48ch;margin:0 auto;}
+
+        .lemans-page #autor{padding-top:0;}
+        .lemans-page .author-links{display:flex;gap:14px;flex-wrap:wrap;}
+        .lemans-page .author-links a{
+          display:flex;flex-direction:column;gap:4px;
+          background:var(--l-bg-card);border:1px solid var(--l-line);border-radius:6px;
+          padding:16px 20px;text-decoration:none;min-width:200px;
+          transition:border-color 0.25s, transform 0.25s;
+        }
+        .lemans-page .author-links a:hover{border-color:var(--l-orange-dim);transform:translateY(-3px);}
+        .lemans-page .author-links .k{font-family:var(--font-jetbrains-mono), monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--l-muted-2);}
+        .lemans-page .author-links .v{font-size:15px;font-weight:600;color:var(--l-bone);}
 
         .lemans-page footer.lemans-footer{border-top:1px solid var(--l-line);padding:36px 0;color:var(--l-muted-2);font-size:12.5px;}
         .lemans-page footer.lemans-footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;max-width:1080px;}
@@ -355,7 +365,25 @@ export default function LemansBarberClub() {
         <div className="wrap">
           <div className="reveal"><h2>Vamos colocar a LeMans no bolso de cada cliente.</h2></div>
           <p className="reveal reveal-delay-1">Esse documento é o ponto de partida — a próxima etapa é alinhar identidade visual e regras de negócio na reunião de levantamento.</p>
-          <a className="cta-btn reveal reveal-delay-2" href="mailto:eullerlolatosmo@gmail.com">Falar com a KODY →</a>
+        </div>
+      </section>
+
+      <section id="autor">
+        <div className="wrap">
+          <div className="reveal"><div className="eyebrow"><span className="num">—</span>Quem constrói</div></div>
+          <div className="reveal reveal-delay-1"><div className="rule" /></div>
+          <div className="reveal reveal-delay-1"><h2>Euller Lolato</h2></div>
+          <p className="lede reveal reveal-delay-2">Desenvolvedor por trás da KODY — automações, agentes de IA e produtos web pra negócios reais.</p>
+          <div className="author-links reveal reveal-delay-2">
+            <a href="https://github.com/oileer" target="_blank" rel="noopener noreferrer">
+              <span className="k">GitHub</span>
+              <span className="v">github.com/oileer →</span>
+            </a>
+            <a href="https://www.instagram.com/eullerlolato_/" target="_blank" rel="noopener noreferrer">
+              <span className="k">Instagram</span>
+              <span className="v">@eullerlolato_ →</span>
+            </a>
+          </div>
         </div>
       </section>
 

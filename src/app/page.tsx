@@ -9,7 +9,7 @@ const LINKS = [
   {
     titulo: "KODY OS",
     desc: "Sistema de IA que estrutura sua empresa do zero. Cadastre-se para acesso antecipado + artigos semanais sobre IA e negócios.",
-    href: "https://captura.eullerlolato.com",
+    href: "https://kodyos.eullerlolato.com",
     featured: true,
   },
   {

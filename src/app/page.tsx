@@ -1,4 +1,7 @@
 import Image from "next/image";
+import CursorSpotlight from "./components/CursorSpotlight";
+import CurtainText from "./components/CurtainText";
+import LinkCard from "./components/LinkCard";
 
 const WHATSAPP = "5549991637585";
 const WHATSAPP_MSG = encodeURIComponent(
@@ -38,8 +41,11 @@ export default function Home() {
         padding: "64px 24px 48px",
       }}
     >
+      <div className="intro-veil" aria-hidden />
+      <CursorSpotlight />
       <div
         style={{
+          position: "relative",
           maxWidth: 520,
           width: "100%",
           display: "flex",
@@ -48,21 +54,24 @@ export default function Home() {
           flex: 1,
         }}
       >
-        <Image
-          src="/euller.jpg"
-          alt="Euller Lolato"
-          width={108}
-          height={108}
-          className="avatar-ring anim-fade-in"
-          style={{
-            borderRadius: "50%",
-            objectFit: "cover",
-            border: "2px solid var(--line)",
-          }}
-        />
+        <div className="hero-glow" aria-hidden />
+        <div className="avatar-wrap anim-avatar-in delay-1">
+          <Image
+            src="/euller.jpg"
+            alt="Euller Lolato"
+            width={108}
+            height={108}
+            className="avatar-ring"
+            style={{
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "2px solid var(--line)",
+              display: "block",
+            }}
+          />
+        </div>
 
         <h1
-          className="anim-fade-up delay-1"
           style={{
             fontFamily: "var(--font-audiowide)",
             fontSize: "clamp(24px, 6vw, 32px)",
@@ -70,11 +79,11 @@ export default function Home() {
             color: "var(--bone)",
           }}
         >
-          Euller Lolato
+          <CurtainText text="Euller Lolato" delay={0.55} stagger={0.09} />
         </h1>
 
         <p
-          className="anim-fade-up delay-2"
+          className="anim-blur-up delay-6"
           style={{
             marginTop: 10,
             textAlign: "center",
@@ -88,7 +97,7 @@ export default function Home() {
         </p>
 
         <hr
-          className="anim-slide-right delay-3"
+          className="anim-slide-right"
           style={{
             border: 0,
             height: 2,
@@ -96,40 +105,27 @@ export default function Home() {
             borderRadius: 2,
             background: "linear-gradient(90deg, #FF4500, rgba(255,69,0,0))",
             margin: "28px 0 36px",
+            animationDelay: "0.85s",
           }}
         />
 
         <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 14 }}>
           {LINKS.map((link, i) => (
-            <a
+            <LinkCard
               key={link.titulo}
               href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              className={`link-card anim-fade-up delay-${i + 4}${link.featured ? " featured" : ""}`}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-audiowide)",
-                  fontSize: 15,
-                  letterSpacing: "0.04em",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                {link.titulo} <span className="link-arrow">→</span>
-              </div>
-              <p style={{ marginTop: 6, fontSize: 13, color: "var(--muted)", lineHeight: 1.6 }}>
-                {link.desc}
-              </p>
-            </a>
+              titulo={link.titulo}
+              desc={link.desc}
+              featured={link.featured}
+              delay={1 + i * 0.11}
+            />
           ))}
         </div>
 
         <div
-          className="anim-fade-up delay-7"
+          className="anim-blur-up"
           style={{
+            animationDelay: "1.45s",
             marginTop: "auto",
             paddingTop: 48,
             display: "flex",

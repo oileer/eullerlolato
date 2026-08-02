@@ -69,6 +69,48 @@ body::after {
   background-size: 200px 200px;
 }
 
+/* ── Hero ambient glow ── */
+.hero-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255,69,0,0.16) 0%, rgba(255,69,0,0.05) 45%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-breathe 6s ease-in-out infinite;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  50%      { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+}
+
+/* ── Cursor spotlight (ambient, follows pointer) ── */
+.cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(600px circle at var(--sx, 50%) var(--sy, 50%), rgba(255,69,0,0.06), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+/* ══════════════════════════════════════════════
+   MOTION SYSTEM
+   Easing padrão: ease-out-expo — entrada rápida,
+   chegada suave. Referência: snps/ (EFFECTS.md)
+   ══════════════════════════════════════════════ */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* ── Keyframes ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -83,10 +125,41 @@ body::after {
   to   { width: 48px; }
 }
 
+/* Entrada premium: desfoque → nitidez, com leve subida */
+@keyframes blurUp {
+  from { opacity: 0; transform: translateY(24px); filter: blur(10px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* Cortina: texto sobe de trás de uma máscara */
+@keyframes curtainUp {
+  from { transform: translateY(105%); }
+  to   { transform: translateY(0); }
+}
+
+/* Avatar entra com escala + desfoque */
+@keyframes avatarIn {
+  from { opacity: 0; transform: scale(0.86); filter: blur(8px); }
+  to   { opacity: 1; transform: scale(1);    filter: blur(0); }
+}
+
+/* Anel cônico girando ao redor do avatar */
+@keyframes ringSweep {
+  to { transform: rotate(360deg); }
+}
+
+/* Véu de abertura que se dissolve */
+@keyframes veilOut {
+  from { opacity: 1; }
+  to   { opacity: 0; visibility: hidden; }
+}
+
 /* ── Animation utilities ── */
-.anim-fade-up    { animation: fadeUp  0.6s ease both; }
-.anim-fade-in    { animation: fadeIn  0.5s ease both; }
-.anim-slide-right { animation: slideRight 0.8s ease both; }
+.anim-fade-up     { animation: fadeUp  0.7s var(--ease-out-expo) both; }
+.anim-fade-in     { animation: fadeIn  0.5s ease both; }
+.anim-slide-right { animation: slideRight 0.8s var(--ease-out-expo) both; }
+.anim-blur-up     { animation: blurUp 0.9s var(--ease-out-expo) both; }
+.anim-avatar-in   { animation: avatarIn 1s var(--ease-out-expo) both; }
 
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
@@ -95,6 +168,66 @@ body::after {
 .delay-5 { animation-delay: 0.5s; }
 .delay-6 { animation-delay: 0.6s; }
 .delay-7 { animation-delay: 0.7s; }
+
+/* ── Véu de abertura ── */
+.intro-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: var(--bg);
+  pointer-events: none;
+  animation: veilOut 0.9s var(--ease-soft) 0.15s both;
+}
+
+/* ── Reveal de texto por palavra (máscara/cortina) ── */
+.curtain {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  /* espaço pra descendentes (g, y, ç) não serem cortados */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.curtain > span {
+  display: inline-block;
+  animation: curtainUp 1s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0s);
+}
+
+/* ── Anel cônico do avatar ── */
+.avatar-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 3px;
+}
+.avatar-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 69, 0, 0.7) 60deg,
+    transparent 140deg,
+    transparent 360deg
+  );
+  animation: ringSweep 4.5s linear infinite, fadeIn 1s ease 0.5s both;
+  z-index: 0;
+}
+.avatar-wrap > * { position: relative; z-index: 1; }
+
+/* ── Respeitar preferência de menos movimento ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .intro-veil { display: none; }
+}
 
 /* ── Hover states ── */
 .benefit-card {
@@ -120,6 +253,7 @@ body::after {
 
 /* ── Link cards ── */
 .link-card {
+  position: relative;
   display: block;
   background: var(--bg-card);
   border: 1px solid var(--line);
@@ -127,8 +261,19 @@ body::after {
   padding: 20px 24px;
   text-decoration: none;
   color: var(--bone);
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.link-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(255,69,0,0.12), transparent 70%);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.link-card:hover::before { opacity: 1; }
 .link-card:hover {
   border-color: rgba(255,69,0,0.5);
   transform: translateY(-3px);
@@ -141,9 +286,33 @@ body::after {
 .link-card:hover .link-arrow { transform: translateX(4px); }
 .link-arrow { color: var(--orange); transition: transform 0.3s ease; display: inline-block; }
 
+/* ── Featured pulse dot (radar) ── */
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: radar-pulse-ring 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes radar-pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
 /* ── Avatar ring pulse ── */
 @keyframes ring-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,0,0.2); }
   50%       { box-shadow: 0 0 0 8px rgba(255,69,0,0); }
 }
-.avatar-ring { animation: ring-pulse 3s ease infinite; }
+/* pulso começa depois que o avatar terminou de entrar */
+.avatar-ring { animation: ring-pulse 3s ease 1.2s infinite; }

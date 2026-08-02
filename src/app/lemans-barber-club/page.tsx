@@ -50,15 +50,17 @@ export default function LemansBarberClub() {
     );
     revealEls.forEach((el) => io.observe(el));
 
+    const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
     const heroEls = root.querySelectorAll<HTMLElement>("[data-hero]");
     heroEls.forEach((el, i) => {
-      el.style.transition =
-        "opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1)";
-      el.style.transform = "translateY(16px)";
+      el.style.transition = `opacity 0.9s ${EASE}, transform 0.9s ${EASE}, filter 0.9s ${EASE}`;
+      el.style.transform = "translateY(24px)";
+      el.style.filter = "blur(10px)";
       setTimeout(() => {
         el.style.opacity = "1";
         el.style.transform = "translateY(0)";
-      }, 200 + i * 130);
+        el.style.filter = "blur(0)";
+      }, 400 + i * 140);
     });
 
     const canvas = root.querySelector<HTMLCanvasElement>("#lemans-field");
@@ -156,6 +158,7 @@ export default function LemansBarberClub() {
           --l-muted-2:#5c5c58;
           --l-orange:#FF4500;
           --l-orange-dim: rgba(255,69,0,0.35);
+          --l-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
           background:var(--l-bg);
           color:var(--l-bone);
@@ -226,14 +229,14 @@ export default function LemansBarberClub() {
         .lemans-page .scroll-cue .bar{width:1px;height:36px;background:linear-gradient(to bottom, var(--l-orange), transparent);animation:lemansScrollPulse 1.8s ease-in-out infinite;}
         @keyframes lemansScrollPulse{ 0%,100%{opacity:0.3;} 50%{opacity:1;} }
 
-        .lemans-page .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1);}
-        .lemans-page .reveal.in{opacity:1;transform:translateY(0);}
+        .lemans-page .reveal{opacity:0;transform:translateY(28px);filter:blur(8px);transition:opacity 0.85s var(--l-ease), transform 0.85s var(--l-ease), filter 0.85s var(--l-ease);}
+        .lemans-page .reveal.in{opacity:1;transform:translateY(0);filter:blur(0);}
         .lemans-page .reveal-delay-1{transition-delay:0.08s;}
         .lemans-page .reveal-delay-2{transition-delay:0.16s;}
         .lemans-page .reveal-delay-3{transition-delay:0.24s;}
         .lemans-page .reveal-delay-4{transition-delay:0.32s;}
 
-        .lemans-page .rule{height:2px;border-radius:2px;background:linear-gradient(90deg, var(--l-orange), rgba(255,69,0,0));margin-bottom:32px;width:0;transition:width 1s cubic-bezier(.2,.7,.2,1);}
+        .lemans-page .rule{height:2px;border-radius:2px;background:linear-gradient(90deg, var(--l-orange), rgba(255,69,0,0));margin-bottom:32px;width:0;transition:width 1s var(--l-ease);}
         .lemans-page .reveal.in .rule{width:64px;}
 
         .lemans-page .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
@@ -282,6 +285,8 @@ export default function LemansBarberClub() {
         .lemans-page footer.lemans-footer{border-top:1px solid var(--l-line);padding:36px 0;color:var(--l-muted-2);font-size:12.5px;}
         .lemans-page footer.lemans-footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;max-width:1080px;}
       `}</style>
+
+      <div className="intro-veil" aria-hidden />
 
       <header className="lemans-header">
         <div className="wrap">

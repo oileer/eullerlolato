@@ -429,6 +429,12 @@ export default function GauersBarbearia() {
                 </div>
               </div>
               <p className="bio">Primeiro contato, alinhamento comercial e acompanhamento no dia a dia — inclusive depois que o app entra no ar.</p>
+              <div className="author-links">
+                <a href={`https://wa.me/5549991637585?text=${encodeURIComponent("Oi Cristian! Quero saber mais sobre o app da Gauer's Barbearia.")}`} target="_blank" rel="noopener noreferrer">
+                  <span className="k">WhatsApp</span>
+                  <span className="v">(49) 99163-7585 →</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

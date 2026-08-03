@@ -34,7 +34,10 @@ input:focus { outline: none; }
 /* ── Hero section com imagem de fundo ── */
 .hero-section {
   position: relative;
-  overflow: hidden;
+  /* `clip` em vez de `hidden`: os dois recortam o ::before do parallax, mas
+     `hidden` cria um contêiner de scroll e isso quebra o `position: sticky`
+     do palco de links lá dentro. `clip` não cria. */
+  overflow: clip;
 }
 
 .hero-section::before {
@@ -274,6 +277,28 @@ body::after {
   transition: transform 0.15s, opacity 0.15s;
 }
 .cta-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+/* ── Palco de links: um card por vez, centralizado ── */
+.link-stage {
+  width: 100%;
+}
+
+/* Fica preso no topo enquanto a seção alta cruza a tela — é o que segura o
+   card no centro enquanto o scroll avança a fila. */
+.link-stage-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+/* Todos os cards na mesma célula: a troca vira fusão cruzada, não empilhamento. */
+.link-stage-slot {
+  grid-area: 1 / 1;
+  width: 100%;
+  will-change: opacity, transform;
+}
 
 /* ── Link cards ── */
 .link-card {

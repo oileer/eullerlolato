@@ -1,7 +1,7 @@
 import Image from "next/image";
 import CursorSpotlight from "./components/CursorSpotlight";
 import CurtainText from "./components/CurtainText";
-import LinkCard from "./components/LinkCard";
+import LinkStage from "./components/LinkStage";
 import ScrollReveal from "./components/ScrollReveal";
 
 const WHATSAPP = "5549991637585";
@@ -112,18 +112,7 @@ export default function Home() {
           }}
         />
 
-        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 14 }}>
-          {LINKS.map((link, i) => (
-            <LinkCard
-              key={link.titulo}
-              href={link.href}
-              titulo={link.titulo}
-              desc={link.desc}
-              featured={link.featured}
-              delay={1 + i * 0.11}
-            />
-          ))}
-        </div>
+        <LinkStage items={LINKS} />
 
         <div
           className="reveal"

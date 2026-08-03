@@ -9,9 +9,14 @@ type LinkCardProps = {
   featured?: boolean;
   /** atraso de entrada em segundos */
   delay?: number;
+  /**
+   * Dentro do `LinkStage` quem controla a visibilidade é o scroll, não o
+   * `ScrollReveal` — sem isso os dois disputariam a opacidade do mesmo card.
+   */
+  staged?: boolean;
 };
 
-export default function LinkCard({ href, titulo, desc, featured, delay = 0 }: LinkCardProps) {
+export default function LinkCard({ href, titulo, desc, featured, delay = 0, staged }: LinkCardProps) {
   const ref = useRef<HTMLAnchorElement>(null);
 
   const onPointerMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
@@ -29,8 +34,8 @@ export default function LinkCard({ href, titulo, desc, featured, delay = 0 }: Li
       target={href.startsWith("http") ? "_blank" : undefined}
       rel="noopener noreferrer"
       onPointerMove={onPointerMove}
-      className={`link-card reveal${featured ? " featured" : ""}`}
-      style={{ "--d": `${delay}s` } as React.CSSProperties}
+      className={`link-card${staged ? "" : " reveal"}${featured ? " featured" : ""}`}
+      style={staged ? undefined : ({ "--d": `${delay}s` } as React.CSSProperties)}
     >
       <div
         style={{

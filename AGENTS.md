@@ -12,6 +12,7 @@ Quatro peças, todas em `src/app/components/`, montadas no `layout.tsx` (exceto
 |---|---|
 | `SmoothScroll.tsx` | Scroll com inércia via [Lenis](https://github.com/darkroomengineering/lenis) |
 | `Parallax.tsx` | Desloca fundos marcados com `data-parallax` |
+| `LinkStage.tsx` | Palco de links: um card por vez, centralizado, trocando no scroll |
 | `ScrollReveal.tsx` | Revela `.reveal` conforme entra na tela (IntersectionObserver) |
 | `CursorSpotlight.tsx` | Brilho que segue o cursor |
 
@@ -56,11 +57,41 @@ O número em `data-parallax` é a amplitude em %, padrão 10. **A folga do `inse
 precisa ser maior que a amplitude** — o `::before` esticado tem altura maior que
 o pai, então a margem real encolhe proporcionalmente.
 
+### Palco de links (`LinkStage.tsx`)
+
+Um card por vez, centralizado na tela; o anterior some enquanto o próximo
+aparece, conforme rola.
+
+Como funciona: a seção tem `100vh` **por card**, e o miolo (`.link-stage-pin`)
+fica `position: sticky` no topo. Enquanto a seção alta cruza a tela, o miolo
+permanece parado e os cards se revezam nele. Todos ocupam a mesma célula do
+grid (`grid-area: 1/1`), então a troca é fusão cruzada, não empilhamento.
+
+**Três pontos que não são óbvios:**
+
+1. **`overflow: clip`, não `hidden`, na `.hero-section`.** Os dois recortam o
+   `::before` do parallax igual, mas `hidden` cria um contêiner de scroll — e
+   isso mata o `position: sticky` de qualquer descendente. `clip` não cria.
+   Trocar de volta para `hidden` quebra o palco silenciosamente.
+2. **O percurso vai do centro do primeiro card ao centro do último**
+   (`cursor = 0.5 + progress * (n - 1)`), e não de `0` a `n`. Com o mapeamento
+   ingênuo, o primeiro e o último card aparecem pela metade nas pontas da seção
+   — medido: 0.15 de opacidade em vez de 1.
+3. **`LinkCard` recebe `staged`** para largar a classe `.reveal`. Sem isso o
+   `ScrollReveal` e o palco disputariam a opacidade do mesmo elemento.
+
+Para afrouxar ou apertar a fusão, mexer no fator `1.7` do cálculo de opacidade:
+menor = mais sobreposição entre os cards, maior = troca mais seca.
+
 ### Acessibilidade
 
-Todos os quatro componentes checam `prefers-reduced-motion` e não inicializam
-sob essa flag. O `<noscript>` no `layout.tsx` força `.reveal` visível para quem
-está sem JS.
+Todos os cinco componentes checam `prefers-reduced-motion` e não inicializam sob
+essa flag — no caso do `LinkStage`, ele cai na coluna empilhada de sempre, já
+que um palco preso ao scroll esconderia conteúdo de quem não pode rolar três
+telas. Esse mesmo fallback é o que sai no SSR, então quem está sem JS também vê
+os três links de uma vez.
+
+O `<noscript>` no `layout.tsx` força `.reveal` visível para quem está sem JS.
 
 ## Snap
 

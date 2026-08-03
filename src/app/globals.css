@@ -169,6 +169,23 @@ body::after {
 .delay-6 { animation-delay: 0.6s; }
 .delay-7 { animation-delay: 0.7s; }
 
+/* ── Scroll reveal: some, sobe e ganha nitidez ao entrar na tela ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(10px);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo),
+    filter 0.9s var(--ease-out-expo);
+  transition-delay: var(--d, 0s);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
 /* ── Véu de abertura ── */
 .intro-veil {
   position: fixed;

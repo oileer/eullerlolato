@@ -29,8 +29,8 @@ export default function LinkCard({ href, titulo, desc, featured, delay = 0 }: Li
       target={href.startsWith("http") ? "_blank" : undefined}
       rel="noopener noreferrer"
       onPointerMove={onPointerMove}
-      className={`link-card anim-blur-up${featured ? " featured" : ""}`}
-      style={{ animationDelay: `${delay}s` }}
+      className={`link-card reveal${featured ? " featured" : ""}`}
+      style={{ "--d": `${delay}s` } as React.CSSProperties}
     >
       <div
         style={{

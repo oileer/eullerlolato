@@ -14,6 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${inter.variable} ${audiowide.variable}`}>
       <body style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
+        <noscript>
+          <style>{`.reveal{opacity:1 !important;transform:none !important;filter:none !important;}`}</style>
+        </noscript>
         {children}
       </body>
     </html>

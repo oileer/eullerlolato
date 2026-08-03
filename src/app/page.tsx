@@ -2,6 +2,7 @@ import Image from "next/image";
 import CursorSpotlight from "./components/CursorSpotlight";
 import CurtainText from "./components/CurtainText";
 import LinkCard from "./components/LinkCard";
+import ScrollReveal from "./components/ScrollReveal";
 
 const WHATSAPP = "5549991637585";
 const WHATSAPP_MSG = encodeURIComponent(
@@ -42,6 +43,7 @@ export default function Home() {
       }}
     >
       <div className="intro-veil" aria-hidden />
+      <ScrollReveal />
       <CursorSpotlight />
       <div
         style={{
@@ -123,16 +125,16 @@ export default function Home() {
         </div>
 
         <div
-          className="anim-blur-up"
+          className="reveal"
           style={{
-            animationDelay: "1.45s",
+            "--d": "1.45s",
             marginTop: "auto",
             paddingTop: 48,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             gap: 12,
-          }}
+          } as React.CSSProperties}
         >
           <Image
             src="/kody-logo.png"

@@ -269,18 +269,23 @@ export default function LemansBarberClub() {
         .lemans-page #cta p{color:var(--l-muted);max-width:48ch;margin:0 auto;}
 
         .lemans-page #autor{padding-top:0;}
-        .lemans-page .autor-row{display:flex;gap:24px;align-items:flex-start;}
-        @media (max-width:560px){ .lemans-page .autor-row{flex-direction:column;} }
-        .lemans-page .author-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px;}
+        .lemans-page .team{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+        @media (max-width:720px){ .lemans-page .team{grid-template-columns:1fr;} }
+        .lemans-page .member{background:var(--l-bg-card);border:1px solid var(--l-line);border-radius:6px;padding:26px 26px 22px;}
+        .lemans-page .member .head{display:flex;gap:16px;align-items:center;margin-bottom:16px;}
+        .lemans-page .member .role{font-family:var(--font-jetbrains-mono), monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--l-orange);margin-bottom:4px;}
+        .lemans-page .member .who{font-family:var(--font-audiowide), system-ui, sans-serif;font-size:19px;line-height:1.2;}
+        .lemans-page .member .bio{color:var(--l-muted);font-size:14px;}
+        .lemans-page .author-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
         .lemans-page .author-links a{
-          display:flex;flex-direction:column;gap:4px;
-          background:var(--l-bg-card);border:1px solid var(--l-line);border-radius:6px;
-          padding:16px 20px;text-decoration:none;min-width:200px;
+          display:flex;flex-direction:column;gap:3px;
+          background:rgba(255,255,255,0.03);border:1px solid var(--l-line);border-radius:6px;
+          padding:12px 16px;text-decoration:none;flex:1;min-width:150px;
           transition:border-color 0.25s, transform 0.25s;
         }
         .lemans-page .author-links a:hover{border-color:var(--l-orange-dim);transform:translateY(-3px);}
         .lemans-page .author-links .k{font-family:var(--font-jetbrains-mono), monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--l-muted-2);}
-        .lemans-page .author-links .v{font-size:15px;font-weight:600;color:var(--l-bone);}
+        .lemans-page .author-links .v{font-size:14px;font-weight:600;color:var(--l-bone);}
 
         .lemans-page footer.lemans-footer{border-top:1px solid var(--l-line);padding:36px 0;color:var(--l-muted-2);font-size:12.5px;}
         .lemans-page footer.lemans-footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;max-width:1080px;}
@@ -379,19 +384,25 @@ export default function LemansBarberClub() {
         <div className="wrap">
           <div className="reveal"><div className="eyebrow"><span className="num">—</span>Quem constrói</div></div>
           <div className="reveal reveal-delay-1"><div className="rule" /></div>
-          <div className="autor-row">
-            <Image
-              src="/euller.jpg"
-              alt="Euller Lolato"
-              width={88}
-              height={88}
-              className="reveal reveal-delay-1"
-              style={{ borderRadius: "50%", objectFit: "cover", border: "2px solid var(--l-line)" }}
-            />
-            <div>
-              <div className="reveal reveal-delay-1"><h2>Euller Lolato</h2></div>
-              <p className="lede reveal reveal-delay-2">Desenvolvedor por trás da KODY — automações, agentes de IA e produtos web pra negócios reais.</p>
-              <div className="author-links reveal reveal-delay-2">
+          <div className="reveal reveal-delay-1"><h2>O time por trás</h2></div>
+
+          <div className="team">
+            <div className="member reveal reveal-delay-1">
+              <div className="head">
+                <Image
+                  src="/euller.jpg"
+                  alt="Euller Lolato"
+                  width={72}
+                  height={72}
+                  style={{ borderRadius: "50%", objectFit: "cover", border: "2px solid var(--l-line)", flexShrink: 0 }}
+                />
+                <div>
+                  <div className="role">Desenvolvimento</div>
+                  <div className="who">Euller Lolato</div>
+                </div>
+              </div>
+              <p className="bio">Desenvolvedor por trás da KODY — automações, agentes de IA e produtos web pra negócios reais.</p>
+              <div className="author-links">
                 <a href="https://github.com/oileer" target="_blank" rel="noopener noreferrer">
                   <span className="k">GitHub</span>
                   <span className="v">github.com/oileer →</span>
@@ -401,6 +412,23 @@ export default function LemansBarberClub() {
                   <span className="v">@eullerlolato_ →</span>
                 </a>
               </div>
+            </div>
+
+            <div className="member reveal reveal-delay-2">
+              <div className="head">
+                <Image
+                  src="/cristian.jpg"
+                  alt="Cristian"
+                  width={72}
+                  height={72}
+                  style={{ borderRadius: "50%", objectFit: "cover", border: "2px solid var(--l-line)", flexShrink: 0 }}
+                />
+                <div>
+                  <div className="role">Comercial e suporte</div>
+                  <div className="who">Cristian</div>
+                </div>
+              </div>
+              <p className="bio">Primeiro contato, alinhamento comercial e acompanhamento no dia a dia — inclusive depois que o app entra no ar.</p>
             </div>
           </div>
         </div>

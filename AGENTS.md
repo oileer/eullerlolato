@@ -62,10 +62,15 @@ o pai, então a margem real encolhe proporcionalmente.
 Um card por vez, centralizado na tela; o anterior some enquanto o próximo
 aparece, conforme rola.
 
-Como funciona: a seção tem `100vh` **por card**, e o miolo (`.link-stage-pin`)
-fica `position: sticky` no topo. Enquanto a seção alta cruza a tela, o miolo
-permanece parado e os cards se revezam nele. Todos ocupam a mesma célula do
-grid (`grid-area: 1/1`), então a troca é fusão cruzada, não empilhamento.
+Como funciona: o miolo (`.link-stage-pin`) fica `position: sticky` no topo e a
+seção é alta o bastante para ele permanecer preso enquanto os cards se revezam.
+Todos ocupam a mesma célula do grid (`grid-area: 1/1`), então a troca é fusão
+cruzada, não empilhamento.
+
+A altura é `100vh + (n-1) × VH_POR_TROCA` — uma tela para o miolo preso, mais o
+percurso de cada troca. **O ritmo é definido por troca, não por card**
+(`VH_POR_TROCA`, hoje `60`): assim ele não muda quando entra ou sai um link.
+Menor encurta a página e acelera; abaixo de ~40 começa a parecer nervoso.
 
 **Três pontos que não são óbvios:**
 

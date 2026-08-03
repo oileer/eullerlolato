@@ -11,6 +11,13 @@ export type StageLink = {
 };
 
 /**
+ * Quanto se rola, em vh, para trocar de um card para o próximo. É este número
+ * que define o ritmo — não a altura total. Menor deixa a troca mais rápida e
+ * encurta a página; muito menor que 40 começa a parecer nervoso.
+ */
+const VH_POR_TROCA = 60;
+
+/**
  * Palco de links: um card por vez, centralizado, trocando conforme rola.
  *
  * A seção é alta (100vh por card) e o miolo fica `sticky` no topo — enquanto a
@@ -106,7 +113,12 @@ export default function LinkStage({ items }: { items: StageLink[] }) {
     <div
       ref={sectionRef}
       className="link-stage"
-      style={{ height: `${items.length * 100}vh` }}
+      style={{
+        // Uma tela para o miolo preso, mais o percurso de cada troca. Definir
+        // por troca (e não por card) mantém o ritmo igual com qualquer
+        // quantidade de links.
+        height: `calc(100vh + ${Math.max(0, items.length - 1) * VH_POR_TROCA}vh)`,
+      }}
     >
       <div className="link-stage-pin">
         {items.map((link, i) => (

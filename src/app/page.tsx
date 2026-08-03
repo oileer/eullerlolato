@@ -34,6 +34,7 @@ export default function Home() {
   return (
     <main
       className="hero-section"
+      data-parallax="10"
       style={{
         minHeight: "100vh",
         display: "flex",

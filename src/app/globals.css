@@ -12,7 +12,10 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* O Lenis marca <html> com .lenis quando assume o scroll. Enquanto ele estiver
+   no comando o smooth nativo precisa sair do caminho, senão os dois disputam a
+   mesma rolagem; sem Lenis (reduced-motion, JS off) o nativo segue valendo. */
+html:not(.lenis) { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
@@ -37,13 +40,17 @@ input:focus { outline: none; }
 .hero-section::before {
   content: "";
   position: absolute;
-  inset: 0;
+  /* folga vertical: o parallax desloca até 10%, então sobra margem para a
+     borda da imagem nunca entrar em cena */
+  inset: -14% 0;
   background:
     url('/hero-bg.jpg') center right / cover no-repeat;
   opacity: 0.2;
   transition: opacity 0.6s ease;
   pointer-events: none;
   z-index: 0;
+  transform: translate3d(0, var(--parallax-y, 0%), 0);
+  will-change: transform;
   mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
   -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
 }

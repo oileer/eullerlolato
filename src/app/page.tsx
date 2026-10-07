@@ -106,7 +106,7 @@ export default function Home() {
             height: 2,
             width: 48,
             borderRadius: 2,
-            background: "linear-gradient(90deg, #FF4500, rgba(255,69,0,0))",
+            background: "linear-gradient(90deg, #A64B2A, rgba(166,75,42,0))",
             margin: "28px 0 36px",
             animationDelay: "0.85s",
           }}

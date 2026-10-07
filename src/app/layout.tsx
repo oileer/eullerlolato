@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Audiowide } from "next/font/google";
+import { Inter, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 import Parallax from "./components/Parallax";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const audiowide = Audiowide({ weight: "400", subsets: ["latin"], variable: "--font-audiowide" });
+const audiowide = Bricolage_Grotesque({ weight: ["600", "700", "800"], subsets: ["latin"], variable: "--font-audiowide" });
 
 export const metadata: Metadata = {
   title: "Euller Lolato — IA aplicada a negócios",

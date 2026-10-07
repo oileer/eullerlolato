@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0A0A0A;
-  --bg-soft: #111111;
-  --bg-card: #141414;
-  --line: #222222;
-  --bone: #F5F5F0;
-  --muted: #8a8a85;
-  --muted-2: #5c5c58;
-  --orange: #FF4500;
+  --bg: #F7F2ED;
+  --bg-soft: #EFE6DC;
+  --bg-card: #FFFFFF;
+  --line: #E4D7C8;
+  --bone: #2A1B12;
+  --muted: #6B5647;
+  --muted-2: #9A8573;
+  --orange: #A64B2A;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,7 +24,7 @@ body {
   line-height: 1.6;
   /* Dot grid texture */
   background-image:
-    radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    radial-gradient(circle, rgba(42,27,18,0.05) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -48,7 +48,7 @@ input:focus { outline: none; }
   inset: -14% 0;
   background:
     url('/hero-bg.jpg') center right / cover no-repeat;
-  opacity: 0.2;
+  opacity: 0.09;
   transition: opacity 0.6s ease;
   pointer-events: none;
   z-index: 0;
@@ -87,7 +87,7 @@ body::after {
   width: 420px;
   height: 420px;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(255,69,0,0.16) 0%, rgba(255,69,0,0.05) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(166,75,42,0.16) 0%, rgba(166,75,42,0.05) 45%, transparent 70%);
   filter: blur(10px);
   pointer-events: none;
   z-index: 0;
@@ -107,7 +107,7 @@ body::after {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
-  background: radial-gradient(600px circle at var(--sx, 50%) var(--sy, 50%), rgba(255,69,0,0.06), transparent 70%);
+  background: radial-gradient(600px circle at var(--sx, 50%) var(--sy, 50%), rgba(166,75,42,0.06), transparent 70%);
   mix-blend-mode: screen;
 }
 
@@ -236,7 +236,7 @@ body::after {
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    rgba(255, 69, 0, 0.7) 60deg,
+    rgba(166, 75, 42, 0.7) 60deg,
     transparent 140deg,
     transparent 360deg
   );
@@ -261,7 +261,7 @@ body::after {
   transition: border-color 0.2s, transform 0.2s;
 }
 .benefit-card:hover {
-  border-color: rgba(255,69,0,0.35) !important;
+  border-color: rgba(166,75,42,0.35) !important;
   transform: translateY(-2px);
 }
 
@@ -318,18 +318,18 @@ body::after {
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(255,69,0,0.12), transparent 70%);
+  background: radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(166,75,42,0.12), transparent 70%);
   transition: opacity 0.4s ease;
   pointer-events: none;
 }
 .link-card:hover::before { opacity: 1; }
 .link-card:hover {
-  border-color: rgba(255,69,0,0.5);
+  border-color: rgba(166,75,42,0.5);
   transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(255,69,0,0.08), 0 2px 8px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 32px rgba(166,75,42,0.08), 0 2px 8px rgba(0,0,0,0.4);
 }
 .link-card.featured {
-  border-color: rgba(255,69,0,0.35);
+  border-color: rgba(166,75,42,0.35);
   border-left: 2px solid var(--orange);
 }
 .link-card:hover .link-arrow { transform: translateX(4px); }
@@ -360,8 +360,8 @@ body::after {
 
 /* ── Avatar ring pulse ── */
 @keyframes ring-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,0,0.2); }
-  50%       { box-shadow: 0 0 0 8px rgba(255,69,0,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(166,75,42,0.2); }
+  50%       { box-shadow: 0 0 0 8px rgba(166,75,42,0); }
 }
 /* pulso começa depois que o avatar terminou de entrar */
 .avatar-ring { animation: ring-pulse 3s ease 1.2s infinite; }

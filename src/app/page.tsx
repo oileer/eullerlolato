@@ -82,7 +82,7 @@ export default function Home() {
 
         <h1
           style={{
-            fontFamily: "var(--font-audiowide)",
+            fontFamily: "var(--font-nex)",
             fontSize: "clamp(24px, 6vw, 32px)",
             marginTop: 24,
             color: "var(--bone)",

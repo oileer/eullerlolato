@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Bricolage_Grotesque } from "next/font/google";
+import { Inter, Audiowide, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 import Parallax from "./components/Parallax";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const audiowide = Bricolage_Grotesque({ weight: ["600", "700", "800"], subsets: ["latin"], variable: "--font-audiowide" });
+const audiowide = Audiowide({ weight: "400", subsets: ["latin"], variable: "--font-audiowide" });
+const nex = Bricolage_Grotesque({ weight: ["600", "700", "800"], subsets: ["latin"], variable: "--font-nex" });
 
 export const metadata: Metadata = {
   title: "Euller Lolato — IA aplicada a negócios",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${audiowide.variable}`}>
+    <html lang="pt-BR" className={`${inter.variable} ${audiowide.variable} ${nex.variable}`}>
       <body style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
         <noscript>
           <style>{`.reveal{opacity:1 !important;transform:none !important;filter:none !important;}`}</style>

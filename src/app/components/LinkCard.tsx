@@ -39,7 +39,7 @@ export default function LinkCard({ href, titulo, desc, featured, delay = 0, stag
     >
       <div
         style={{
-          fontFamily: "var(--font-audiowide)",
+          fontFamily: "var(--font-nex)",
           fontSize: 15,
           letterSpacing: "0.04em",
           display: "flex",

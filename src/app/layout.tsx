@@ -9,7 +9,7 @@ const audiowide = Bricolage_Grotesque({ weight: ["600", "700", "800"], subsets: 
 
 export const metadata: Metadata = {
   title: "Euller Lolato — IA aplicada a negócios",
-  description: "Empreendedor digital especializado em IA aplicada a negócios. Conheça o KODY OS, brand books e projetos.",
+  description: "Empreendedor digital especializado em IA aplicada a negócios. Conheça a Nex Studio, a Nexora e os brand books.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

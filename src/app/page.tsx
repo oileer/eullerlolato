@@ -11,10 +11,16 @@ const WHATSAPP_MSG = encodeURIComponent(
 
 const LINKS = [
   {
-    titulo: "KODY OS",
-    desc: "Sistema de IA que estrutura sua empresa do zero. Cadastre-se para acesso antecipado + artigos semanais sobre IA e negócios.",
-    href: "https://kodyos.eullerlolato.com",
+    titulo: "Nex Studio",
+    desc: "Vídeo, anúncios e sites para o seu negócio vender mais.",
+    href: "https://studionex.com.br",
     featured: true,
+  },
+  {
+    titulo: "Nexora",
+    desc: "Sistemas que simplificam, automatizam e aceleram negócios.",
+    href: "https://nexoraos.com.br",
+    featured: false,
   },
   {
     titulo: "Brand Books",
@@ -127,10 +133,10 @@ export default function Home() {
           } as React.CSSProperties}
         >
           <Image
-            src="/kody-logo.png"
-            alt="KODY"
-            width={54}
-            height={18}
+            src="/nex-studio-logo.png"
+            alt="Nex Studio"
+            width={96}
+            height={32}
             style={{ objectFit: "contain", opacity: 0.5 }}
           />
           <p
